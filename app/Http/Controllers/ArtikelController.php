@@ -5,81 +5,84 @@ namespace App\Http\Controllers;
 use App\Artikel;
 use Illuminate\Http\Request;
 
-class ArtikelController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+class ArtikelController extends Controller {
+	/**
+	 * Create a new controller instance.
+	 *
+	 * @return void
+	 */
+	public function __construct() {
+		$this->middleware('auth');
+	}
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function index() {
+		//
+		$data = Artikel::orderBy('created_at', 'DESC')->paginate(5);
+		return view('artikel.index', ['data' => $data]);
+	}
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function create() {
+		//
+	}
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Artikel  $artikel
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Artikel $artikel)
-    {
-        //
-    }
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @return \Illuminate\Http\Response
+	 */
+	public function store(Request $request) {
+		//
+	}
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Artikel  $artikel
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Artikel $artikel)
-    {
-        //
-    }
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  \App\Artikel  $artikel
+	 * @return \Illuminate\Http\Response
+	 */
+	public function show(Artikel $artikel) {
+		//
+	}
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Artikel  $artikel
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Artikel $artikel)
-    {
-        //
-    }
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param  \App\Artikel  $artikel
+	 * @return \Illuminate\Http\Response
+	 */
+	public function edit(Artikel $artikel) {
+		//
+	}
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Artikel  $artikel
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Artikel $artikel)
-    {
-        //
-    }
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  \App\Artikel  $artikel
+	 * @return \Illuminate\Http\Response
+	 */
+	public function update(Request $request, Artikel $artikel) {
+		//
+	}
+
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  \App\Artikel  $artikel
+	 * @return \Illuminate\Http\Response
+	 */
+	public function destroy(Artikel $artikel) {
+		//
+	}
 }
