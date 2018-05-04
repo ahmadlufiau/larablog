@@ -75,5 +75,6 @@ class KomentarController extends Controller {
 	 */
 	public function destroy(Komentar $komentar) {
 		//
+
 	}
 }

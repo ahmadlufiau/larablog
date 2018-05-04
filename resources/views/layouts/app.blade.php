@@ -36,6 +36,7 @@
                     <ul class="navbar-nav mr-auto">
                         <li><a class="nav-link" href="{{ url('home') }}">Home</a></li>
                         <li><a class="nav-link" href="{{ url('artikel') }}">Artikel</a></li>
+                        <li><a class="nav-link" href="{{ url('artikel/create') }}">Tambah Artikel</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

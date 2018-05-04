@@ -5,16 +5,7 @@ namespace App\Http\Controllers;
 use App\Artikel;
 use Illuminate\Http\Request;
 
-class ArtikelController extends Controller {
-	/**
-	 * Create a new controller instance.
-	 *
-	 * @return void
-	 */
-	public function __construct() {
-		$this->middleware('auth');
-	}
-
+class BlogController extends Controller {
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -22,8 +13,8 @@ class ArtikelController extends Controller {
 	 */
 	public function index() {
 		//
-		$data = Artikel::orderBy('created_at', 'DESC')->paginate(5);
-		return view('artikel.index', ['data' => $data]);
+		$artikels = Artikel::all();
+		return view('blog.index', compact('artikels'));
 	}
 
 	/**
@@ -33,7 +24,6 @@ class ArtikelController extends Controller {
 	 */
 	public function create() {
 		//
-		return view('artikel.create');
 	}
 
 	/**
@@ -49,20 +39,20 @@ class ArtikelController extends Controller {
 	/**
 	 * Display the specified resource.
 	 *
-	 * @param  \App\Artikel  $artikel
+	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function show(Artikel $artikel) {
+	public function show($id) {
 		//
 	}
 
 	/**
 	 * Show the form for editing the specified resource.
 	 *
-	 * @param  \App\Artikel  $artikel
+	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function edit(Artikel $artikel) {
+	public function edit($id) {
 		//
 	}
 
@@ -70,20 +60,20 @@ class ArtikelController extends Controller {
 	 * Update the specified resource in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
-	 * @param  \App\Artikel  $artikel
+	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $request, Artikel $artikel) {
+	public function update(Request $request, $id) {
 		//
 	}
 
 	/**
 	 * Remove the specified resource from storage.
 	 *
-	 * @param  \App\Artikel  $artikel
+	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function destroy(Artikel $artikel) {
+	public function destroy($id) {
 		//
 	}
 }
