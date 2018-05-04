@@ -52,20 +52,12 @@
       <div class="row">
 
         <div class="col-sm-8 blog-main">
-          @foreach($artikels as $artikel)
           <div class="blog-post">
-            <h2 class="blog-post-title">{{ $artikel->judul }}</h2>
-            <p class="blog-post-meta">{{ $artikel->created_at->format('d M Y') }} <a href="#">Mark</a></p>
+            <h2 class="blog-post-title">{{ $data->judul }}</h2>
+            <p class="blog-post-meta">{{ $data->created_at->format('d M Y') }} <a href="#">Mark</a></p>
 
-            <p>{{ $artikel->baca_lanjut.'...' }} <a href="{{ url('blog', ['id' => $artikel->id]) }}">baca lanjut</a></p>
+            <p>{{ $data->isi }}</p>
           </div><!-- /.blog-post -->
-          @endforeach
-          <nav>
-            <ul class="pager">
-              <li><a href="{{ $artikels->previousPageUrl() }}">Previous</a></li>
-              <li><a href="{{ $artikels->nextPageUrl() }}">Next</a></li>
-            </ul>
-          </nav>
 
         </div><!-- /.blog-main -->
 

@@ -13,7 +13,7 @@ class BlogController extends Controller {
 	 */
 	public function index() {
 		//
-		$artikels = Artikel::all();
+		$artikels = Artikel::orderBy('created_at', 'DESC')->paginate(5);
 		return view('blog.index', compact('artikels'));
 	}
 
@@ -44,6 +44,8 @@ class BlogController extends Controller {
 	 */
 	public function show($id) {
 		//
+		$data = Artikel::find($id);
+		return view('blog.detailartikel')->with(array('data' => $data));
 	}
 
 	/**
