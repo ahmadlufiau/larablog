@@ -13,6 +13,7 @@
 
 Route::get('/', 'BlogController@index');
 Route::get('/blog/{id}', 'BlogController@show');
+Route::post('/blog/komentar/store', 'BlogController@store');
 
 Auth::routes();
 

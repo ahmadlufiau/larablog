@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Artikel;
+use App\Komentar;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller {
@@ -34,6 +35,13 @@ class BlogController extends Controller {
 	 */
 	public function store(Request $request) {
 		//
+		$data = new Komentar();
+		$data->nama = $request->nama;
+		$data->artikel_id = $request->artikel_id;
+		$data->email = $request->email;
+		$data->isi = $request->isi;
+		$data->save();
+		return redirect('/');
 	}
 
 	/**

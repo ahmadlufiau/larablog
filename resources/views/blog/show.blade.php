@@ -68,18 +68,20 @@
           </blockquote>
           @endforeach
 
-          <form action="" method="POST">
+          <form action="{{ url('blog/komentar/store/') }}" method="POST">
+            {{ csrf_field() }}
+            <input type="hidden" name="artikel_id" class="form-control" value="{{ $data->id }}">
             <div class="form-group">
               <label>Nama:</label>
-              <input type="text" name="nama" class="form-control">
+              <input type="text" name="nama" class="form-control" required>
             </div>
             <div class="form-group">
               <label>Email:</label>
-              <input type="text" name="email" class="form-control">
+              <input type="email" name="email" class="form-control" required>
             </div>
             <div class="form-group">
               <label>Isi:</label>
-              <textarea name="isi" cols="30" rows="10" class="form-control"></textarea>
+              <textarea name="isi" cols="30" rows="10" class="form-control" required></textarea>
             </div>
             <div class="form-group">
               <button type="submit" class="btn btn-primary">Tambah Komentar</button>
