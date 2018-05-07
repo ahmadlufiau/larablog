@@ -68,6 +68,25 @@
           </blockquote>
           @endforeach
 
+          <form action="" method="POST">
+            <div class="form-group">
+              <label>Nama:</label>
+              <input type="text" name="nama" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Email:</label>
+              <input type="text" name="email" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Isi:</label>
+              <textarea name="isi" cols="30" rows="10" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary">Tambah Komentar</button>
+              <button type="reset" class="btn btn-danger">Cancel</button>
+            </div>
+          </form>
+
         </div><!-- /.blog-main -->
 
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
