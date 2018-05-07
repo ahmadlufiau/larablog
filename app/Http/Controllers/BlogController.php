@@ -45,7 +45,9 @@ class BlogController extends Controller {
 	public function show($id) {
 		//
 		$data = Artikel::find($id);
-		return view('blog.detailartikel')->with(array('data' => $data));
+		return view('blog.show')->with(array('data' => $data));
+
+		//return view('blog.show', compact('artikel'));
 	}
 
 	/**

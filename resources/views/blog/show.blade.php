@@ -55,9 +55,18 @@
           <div class="blog-post">
             <h2 class="blog-post-title">{{ $data->judul }}</h2>
             <p class="blog-post-meta">{{ $data->created_at->format('d M Y') }} <a href="#">Mark</a></p>
-
             <p>{{ $data->isi }}</p>
           </div><!-- /.blog-post -->
+
+          <p>Terdapat {{ $data->jml_komentar }} komentar</p>
+
+          @foreach($data->komentars as $komentar)
+          <blockquote>
+          	{{ $komentar->nama }}<br/>
+          	{{ $komentar->email }} <br/>
+          	{{ $komentar->isi }}
+          </blockquote>
+          @endforeach
 
         </div><!-- /.blog-main -->
 
