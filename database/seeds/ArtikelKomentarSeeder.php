@@ -12,6 +12,7 @@ class ArtikelKomentarSeeder extends Seeder {
 	 */
 	public function run() {
 		//Generate dummy artikel
+		$Faker = \Faker\Factory::create();
 		$jml_artikel = 10;
 		for ($i = 1; $i <= $jml_artikel; $i++) {
 			$artikel = new Artikel();
@@ -20,7 +21,8 @@ class ArtikelKomentarSeeder extends Seeder {
 			$artikel->isi = $content;
 			$artikel->baca_lanjut = substr($content, 0, 100);
 			$artikel->jml_komentar = 0;
-			$artikel->gambar = '';
+			$artikel->gambar = 
+			$Faker->image($dir = 'public/gambar', $width = 640, $height = 480,'',false);
 			$artikel->save();
 
 			//Generate dummy komentar

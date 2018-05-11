@@ -7,6 +7,7 @@
     <div class="blog-post">
         <h2 class="blog-post-title">{{ $data->judul }}</h2>
         <p class="blog-post-meta">{{ $data->created_at->format('d M Y') }} <a href="#">Mark</a></p>
+        <img src="{{ asset('public/gambar/'.$data->gambar) }}" alt="">
         <p>{{ $data->isi }}</p>
     </div>
     <!--/ Blog Post -->
