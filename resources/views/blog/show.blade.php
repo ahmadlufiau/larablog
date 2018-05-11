@@ -1,5 +1,5 @@
 @extends('layouts.index')
-@section('title', 'Artikel')
+@section('title', $data -> judul)
 @section('content')
 <!-- Blog Main -->
 <div class="col-sm-8 blog-main">
