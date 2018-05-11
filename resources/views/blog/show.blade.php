@@ -37,7 +37,7 @@
             <textarea name="isi" cols="30" rows="10" class="form-control" required></textarea>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary">Tambah Komentar</button>
+            <button type="submit" class="btn btn-primary">Kirim</button>
             <button type="reset" class="btn btn-danger">Cancel</button>
         </div>
     </form>

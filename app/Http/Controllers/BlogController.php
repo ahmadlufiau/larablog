@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Artikel;
 use App\Komentar;
+use Redirect;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller {
@@ -41,7 +42,7 @@ class BlogController extends Controller {
 		$data->email = $request->email;
 		$data->isi = $request->isi;
 		$data->save();
-		return redirect('/');
+		return Redirect::back();
 	}
 
 	/**

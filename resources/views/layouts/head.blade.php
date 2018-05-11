@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
-    <title>LaraBlog - @yield('title')</title>
+    <title>@yield('title')</title>
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
