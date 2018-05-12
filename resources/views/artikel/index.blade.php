@@ -25,7 +25,7 @@
                                     <td><a href="artikel/{{ $items->id }}/komentar" class=" btn btn-warning">Lihat Komentar</a></td>
                                     <td><a href="" class=" btn btn-primary">Edit</a></td>
                                     <td>
-                                        <form action="{{-- {{ route('artikel.destroy', $items->id) }} --}}" method="post">
+                                        <form action="{{ route('artikel.destroy', $items->id) }}" method="POST">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
                                         <button class="btn btn-danger" type="submit">Delete</button>

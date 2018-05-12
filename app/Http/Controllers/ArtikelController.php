@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Artikel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class ArtikelController extends Controller {
 	/**
@@ -44,6 +45,34 @@ class ArtikelController extends Controller {
 	 */
 	public function store(Request $request) {
 		//
+		$artikel = new Artikel;
+		$artikel->judul = $request->judul;
+		$artikel->isi = $request->isi;
+		$artikel->baca_lanjut = substr($request->isi, 0, 100);
+		$artikel->jml_komentar = 0;
+
+		// Isi field gambar jika ada gambar yang diupload
+		if ($request->hasFile('gambar')) {
+
+			// Mengambil file yang diupload
+			$uploaded_cover = $request->file('gambar');
+
+			// Mengambil extension file
+			$extension = $uploaded_cover->getClientOriginalExtension();
+
+			// Membuat nama file random berikut extension
+			$filename = md5(time()) . "." . $extension;
+
+			// Menyimpan cover ke folder public/gambar
+			$destinationPath = public_path() . DIRECTORY_SEPARATOR . 'gambar';
+			$uploaded_cover->move($destinationPath, $filename);
+
+			// Mengisi field gambar di artikel dengan filename yang baru dibuat
+			$artikel->gambar = $filename;
+			$artikel->save();
+		}
+		
+		return redirect()->route('artikel.index');
 	}
 
 	/**
@@ -83,7 +112,8 @@ class ArtikelController extends Controller {
 	 * @param  \App\Artikel  $artikel
 	 * @return \Illuminate\Http\Response
 	 */
-	public function destroy(Artikel $artikel) {
+	public function destroy($id) {
 		//
+		
 	}
 }
