@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Artikel;
 use Illuminate\Http\Request;
+use Hash;
 use Illuminate\Support\Facades\File;
 
 class ArtikelController extends Controller {
@@ -61,7 +62,7 @@ class ArtikelController extends Controller {
 			$extension = $uploaded_cover->getClientOriginalExtension();
 
 			// Membuat nama file random berikut extension
-			$filename = md5(time()) . "." . $extension;
+			$filename = Hash::make(time()) . "." . $extension;
 
 			// Menyimpan cover ke folder public/gambar
 			$destinationPath = public_path() . DIRECTORY_SEPARATOR . 'gambar';
@@ -71,7 +72,7 @@ class ArtikelController extends Controller {
 			$artikel->gambar = $filename;
 			$artikel->save();
 		}
-		
+
 		return redirect()->route('artikel.index');
 	}
 
@@ -112,8 +113,23 @@ class ArtikelController extends Controller {
 	 * @param  \App\Artikel  $artikel
 	 * @return \Illuminate\Http\Response
 	 */
-	public function destroy($id) {
+	public function destroy(Request $request, $id) {
 		//
-		
+		$artikel = Artikel::find($id);
+		$gambar = $artikel->gambar;
+		if (!$artikel->delete()) {
+			return redirect()->back();
+		}
+		// Hapus gambar lama, jika ada
+		if ($gambar) {
+			$old_gambar = $artikel->gambar;
+			$filepath = public_path() . DIRECTORY_SEPARATOR . 'gambar' . DIRECTORY_SEPARATOR . $artikel->gambar;
+			try {
+				File::delete($filepath);
+			} catch (FileNotFoundException $e) {
+				// File sudah dihapus/tidak ada
+			}
+		}
+		return redirect()->route('artikel.index');
 	}
 }
