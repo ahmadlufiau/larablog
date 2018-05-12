@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Artikel;
 use Illuminate\Http\Request;
-use Hash;
 use Illuminate\Support\Facades\File;
 
 class ArtikelController extends Controller {
@@ -61,8 +60,8 @@ class ArtikelController extends Controller {
 			// Mengambil extension file
 			$extension = $uploaded_cover->getClientOriginalExtension();
 
-			// Membuat nama file random berikut extension
-			$filename = Hash::make(time()) . "." . $extension;
+			// Membuat nama file random dengan extension
+			$filename = md5(time()) . "." . $extension;
 
 			// Menyimpan cover ke folder public/gambar
 			$destinationPath = public_path() . DIRECTORY_SEPARATOR . 'gambar';
@@ -92,8 +91,10 @@ class ArtikelController extends Controller {
 	 * @param  \App\Artikel  $artikel
 	 * @return \Illuminate\Http\Response
 	 */
-	public function edit(Artikel $artikel) {
+	public function edit($id) {
 		//
+		$artikel = Artikel::find($id);
+		return view('artikel.edit')->with(compact('artikel'));
 	}
 
 	/**
@@ -103,8 +104,48 @@ class ArtikelController extends Controller {
 	 * @param  \App\Artikel  $artikel
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $request, Artikel $artikel) {
+	public function update(Request $request, $id) {
 		//
+		$artikel = Artikel::find($id);
+		$artikel->judul = $request->judul;
+		$artikel->isi = $request->isi;
+		$artikel->baca_lanjut = substr($request->isi, 0, 100);
+		$artikel->jml_komentar = $request->jml_komentar;
+
+		// Isi field gambar jika ada gambar yang diupload
+		if ($request->hasFile('gambar')) {
+			
+			// Mengambil gambar yang diupload berikut ektensinya
+			$filename = null;
+			$uploaded_cover = $request->file('gambar');
+			$extension = $uploaded_cover->getClientOriginalExtension();
+
+			// Membuat nama file random dengan extension
+			$filename = md5(time()) . '.' . $extension;
+
+			// Menyimpan gambar ke folder public/gambar
+			$destinationPath = public_path() . DIRECTORY_SEPARATOR . 'gambar';
+			$uploaded_cover->move($destinationPath, $filename);
+
+			// Hapus gambar lama, jika ada
+			if ($artikel->gambar) {
+				$old_gambar = $artikel->gambar;
+				$filepath = public_path() . DIRECTORY_SEPARATOR . 'gambar' . DIRECTORY_SEPARATOR . $artikel->gambar;
+
+				try {
+					File::delete($filepath);
+				} catch (FileNotFoundException $e) {
+					// File sudah dihapus/tidak ada
+				}
+			}
+
+			// Ganti field gambar dengan gambar yang baru
+			$artikel->gambar = $filename;
+			$artikel->save();
+		}
+
+		$artikel->save();
+		return redirect()->route('artikel.index');
 	}
 
 	/**
