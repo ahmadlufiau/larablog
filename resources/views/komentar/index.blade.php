@@ -20,7 +20,13 @@
 								<td>{{ $komentar->email }}</td>
 								<td>{{ $komentar->isi }}</td>
 								<td><a href="" class="btn btn-warning">Edit</a></td>
-								<td><input type="submit" class="btn btn-danger" value="Hapus"></td>
+								<td>
+									<form action="{{ route('komentar.destroy', $komentar->id) }}" method="POST">
+                                        {{ csrf_field() }}
+                                        {{ method_field('DELETE') }}
+                                        <button class="btn btn-danger" type="submit">Delete</button>
+                                    </form>
+								</td>
 							</tr>
 							@endforeach
 						</tbody>

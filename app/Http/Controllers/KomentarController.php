@@ -73,8 +73,10 @@ class KomentarController extends Controller {
 	 * @param  \App\Komentar  $komentar
 	 * @return \Illuminate\Http\Response
 	 */
-	public function destroy(Komentar $komentar) {
+	public function destroy($id) {
 		//
-
+		$komentar = Komentar::find($id);
+		$komentar->delete();
+		return redirect()->back();
 	}
 }
